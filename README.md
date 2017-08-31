@@ -58,3 +58,10 @@ node index.js
 - Open Browser (once all the browsers are started)
 - Open [localhost:8080](http://localhost:8080/). 
 - Input text in **Input Text** field and click **Test** button
+
+## 3. Expected Output
+**Input Text**: sample
+**Response**: “sample:InNode:InPython:InJava”
+- Moreover on console messages are displayed when services communicate with each other
+- Please check the architecture diagram to understand the flow of the control
+
