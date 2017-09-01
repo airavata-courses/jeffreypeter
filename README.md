@@ -66,13 +66,13 @@ assignment1 > python > py-impl
 python PythonServer.py
 ```
 ### Steps: Nodejs server 
-0. (Optional) Instal node libraries
-```
-npm install
-```
 1. Go to app folder
 ```
 assignment1 > node > app
+```
+(Optional) Install node libraries
+```
+npm install
 ```
 2. Start nodejs Server
 ```
