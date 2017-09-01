@@ -9,6 +9,7 @@ Java 1.8, Python 2.7, Nodejs 6.10, Maven 3.5 and Thrift 0.10.0
 2. Python 
 3. Java
 ### Architecture
+[[/images/architecture-assignment1.png|Architecture]]
 - [Diagram](https://docs.google.com/drawings/d/19chcWVkfiW3oI-hUS-BHrzJiR2wj6C1GwNs-TODe4aw)
 - Used Json String for communication between the micro-services
 
@@ -28,16 +29,6 @@ mvn clean install
 java -cp target/application-1.0.jar com.sga.application.server.Server
 ```
 ### Steps: Python server 
-0. (Optional) If thrift libs is not installed in Python
-    - Go to thrift-0.10.0 folder and Run the below command(sudo)
-
-```
-assignment1 > python > thrift-0.10.0
-```
-```
-python setup.py install
-```
-
 0. This microservice runs on Python 2.x. If you are running Python 3.x
 	- [Install](https://virtualenv.pypa.io/en/stable/installation/) virtualenv
 	- Move to the 'python' directory
@@ -56,6 +47,15 @@ python setup.py install
 	```
 	python --version
 	```
+0. (Optional) If thrift libs is not installed in Python
+    - Go to thrift-0.10.0 folder and Run the below command(sudo)
+
+```
+assignment1 > python > thrift-0.10.0
+```
+```
+python setup.py install
+```
 
 1. Go to py-impl folder
 ```
