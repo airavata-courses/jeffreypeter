@@ -4,10 +4,11 @@
 - Tested in both Windows 10 & Ubuntu 16
 ## Technologies: 
 Java 1.8, Python 2.7, Nodejs 6.10, Maven 3.5 and Thrift 0.10.0
-### Three Components: 
-1. Nodejs 
+# Components: 
+1. Java 
 2. Python 
-3. Java
+3. Nodejs
+4. Gateway - Nodejs
 ### Architecture
 [[/images/architecture-assignment1.png|Architecture]]
 - [Diagram](https://docs.google.com/drawings/d/19chcWVkfiW3oI-hUS-BHrzJiR2wj6C1GwNs-TODe4aw)
@@ -24,7 +25,7 @@ assignment1 > java
 ```
 mvn clean install
 ```
-3. Start Java Server
+3. Start Java Server - listens on localhost:9090
 ```
 java -cp target/application-1.0.jar com.sga.application.server.Server
 ```
@@ -61,7 +62,7 @@ python setup.py install
 ```
 assignment1 > python > py-impl
 ```
-2. Start Python Server
+2. Start Python Server  - listens on localhost:9091
 ```
 python PythonServer.py
 ```
@@ -73,14 +74,30 @@ assignment1 > node > app
 (Optional) Install node libraries
 ```
 npm install
+npm install body-parser
 ```
-2. Start nodejs Server
+2. Start nodejs Server - localhost:8080
 ```
 node index.js
 ```
+### Steps: Gateway 
+1. Go to app folder
+```
+assignment1 > gateway
+```
+(Optional) Install node libraries
+```
+npm install
+npm install body-parser
+```
+2. Start nodejs Gateway Server - localhost:8000
+```
+node index.js
+```
+
 ## 2. Open UI
 - Open Browser (once all the microservices are started)
-- Open [localhost:8080](http://localhost:8080/). 
+- Open [localhost:8000](http://localhost:8000/). 
 - Input text in **Input Text** field and click **Test** button
 
 ## 3. Expected Output
