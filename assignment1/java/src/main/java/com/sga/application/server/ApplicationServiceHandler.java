@@ -12,10 +12,16 @@ public class ApplicationServiceHandler implements ApplicationService.Iface {
     	String response = "";
 		try {
 			JSONObject obj = new JSONObject(input);
-			obj.put("text",obj.getString("text") + ":InJava");
+			java.lang.String text = obj.getString("text") + ":InJava";
+			System.out.println("text::"+text);
+			obj.put("text",text);
 			response = obj.toString();
 		} catch(JSONException e) {
+			System.out.println("IN:JAVA::Exception::"+e.getMessage());
 			e.printStackTrace();
+			JSONObject obj = new JSONObject(input);
+			obj.put("msg","Invalid input characters");
+			response = obj.toString();
 		}
         return response;
     }

@@ -18,7 +18,7 @@ public class Server {
             // TServer server = new TThreadPoolServer(new
             // TThreadPoolServer.Args(serverTransport).processor(processor));
 
-            System.out.println("Starting the simple server...");
+            System.out.println("Listening at http://localhost:9090");
             server.serve();
         } catch (Exception e) {
             e.printStackTrace();

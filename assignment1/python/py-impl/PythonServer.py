@@ -18,7 +18,7 @@ class ApplicationServiceHandler:
 	def __init__(self):
 		self.log = {}
 		
-	def client(self,request):
+	def client(self,reqObj):
 		try:
 			# Make socket
 			transport = TSocket.TSocket('localhost', 9090)
@@ -29,24 +29,25 @@ class ApplicationServiceHandler:
 			# Create a client to use the protocol encoder
 			client = ApplicationService.Client(protocol)
 			# Connect!
+			print "communicating with::Java Server"
 			transport.open()
-			print "calling Java Server"
-			msg = client.communicate(request)
+			reqStr = json.dumps(reqObj, ensure_ascii=False)
+			msg = client.communicate(reqStr)
 			print msg
-			transport.close()
-			return msg
-		except Thrift.TException, tx:
-			print "%s" % (tx.message)
+			
+		except:
+			print "Please check if Java server is running"
+			reqObj['msg'] = "Please check if Java server is running"
+			msg = json.dumps(reqObj, ensure_ascii=False)
+		transport.close()
+		return msg
 		
-
 	def communicate(self, input):
 		print input
 		reqObj = json.loads(input)
 		reqObj['text'] = reqObj['text']+ ":InPython"
 		print reqObj['text']
-		resStr = json.dumps(reqObj, ensure_ascii=False)
-		
-		resStr = self.client(resStr)
+		resStr = self.client(reqObj)
 		return resStr
 		
 handler = ApplicationServiceHandler()
@@ -58,6 +59,6 @@ pfactory = TBinaryProtocol.TBinaryProtocolFactory()
  
 server = TServer.TSimpleServer(processor, transport, tfactory, pfactory)
  
-print "Starting python server..."
+print "Listening at http://localhost:9091"
 server.serve()
 print "done!"

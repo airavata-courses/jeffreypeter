@@ -22,7 +22,8 @@ app.get('/', function(req, res){
 });
 
 app.post('/test', function(req, res){
-    console.log('IN:Nodejs::test /');
+    console.log('IN:Nodejs::test');
+	console.log("Request::");
     console.log(req.body);
     reqData = req.body;
     req.body.text = req.body.text + ":InNodejs:"
@@ -31,10 +32,16 @@ app.post('/test', function(req, res){
     var protocol = thrift.TBinaryProtocol;
     var connection = thrift.createConnection("localhost", 9091);
     connection.on('error', function(err) {
-        console.log(err);
+        console.log("Response::");
+		console.log(err);
+        res.writeHead(200, {'Content-Type': 'text/html'});		
+        res.end(JSON.stringify({ msg: 'Please check if Python sever is running', text: req.body.text }));
+		connection.end();
     });
     var client = thrift.createClient(ApplicationService, connection);
+	console.log("communicating with::Python Server")
     client.communicate(JSON.stringify(reqData), function(err, response) {
+		console.log("Response::");
         console.log(response);
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(response);
