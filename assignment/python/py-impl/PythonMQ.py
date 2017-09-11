@@ -1,5 +1,6 @@
 import pika
 import json
+import sys
 
 credentials = pika.PlainCredentials('sgatest', 'L3tm3t38t')
 parameters = pika.ConnectionParameters('149.165.168.247',
@@ -13,7 +14,10 @@ channel.queue_declare(queue='sga.simple.python')
 
 def callback(ch, method, properties, body):
     print(" [x] Received %r" % body)
-    reqObj = json.loads(body)
+
+    str = body.decode('utf-8')
+    print (str)
+    reqObj = json.loads(str)
     reqObj['text'] = reqObj['text']+ ":InPython"
     msg = json.dumps(reqObj, ensure_ascii=False)
 
