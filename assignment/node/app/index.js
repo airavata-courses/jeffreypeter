@@ -54,3 +54,38 @@ app.post('/test', function(req, res){
 port = 8080;
 app.listen(port);
 console.log('Listening at http://localhost:' + port)
+
+var amqp = require('amqplib/callback_api');
+
+amqp.connect('amqp://sgatest:L3tm3t38t@149.165.168.247', function(err, conn) {
+
+    conn.createChannel(function(err, ch) {
+        var ex = 'sga.job';
+        var key='job.new';
+        ch.assertExchange(ex, 'topic', {durable: true});
+        console.log("IN::assertExchange");
+        ch.assertQueue('', {exclusive: true}, function(err, q) {
+            console.log("IN::assertQueue");
+            console.log(' [*] Waiting for logs. To exit press CTRL+C');
+            ch.bindQueue(q.queue, ex, key);
+            ch.consume(q.queue, function(msg) {
+                var msgObj = JSON.parse(msg.content.toString());
+                var text = msgObj.text+":InNodejs";
+                console.log(text);
+                postPython(text);
+
+            }, {noAck: true});
+        });
+    });
+    function postPython(text) {
+        console.log("IN::test");
+        conn.createChannel(function(err, ch) {
+            var q = 'sga.simple.python';
+            ch.assertQueue(q, {durable: false});
+            var message = JSON.stringify({ text:text });
+            ch.sendToQueue(q, new Buffer(message));
+            console.log(" [x] Sent 'Hello World!'");
+        });
+    }
+
+});

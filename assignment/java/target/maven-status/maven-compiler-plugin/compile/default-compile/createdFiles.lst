@@ -15,6 +15,7 @@ com\sga\application\server\ApplicationService$communicate_result$communicate_res
 com\sga\App.class
 com\sga\application\server\ApplicationService$communicate_result$communicate_resultStandardScheme.class
 com\sga\application\server\ApplicationService$communicate_result$_Fields.class
+com\sga\application\server\ServerMQ$1.class
 com\sga\application\server\ApplicationService$communicate_args$communicate_argsTupleScheme.class
 com\sga\application\server\ApplicationService$communicate_result$communicate_resultTupleSchemeFactory.class
 com\sga\application\server\ApplicationService$AsyncClient.class
@@ -26,5 +27,6 @@ com\sga\application\server\ApplicationService$AsyncProcessor$communicate.class
 com\sga\application\server\ApplicationService$communicate_args$communicate_argsStandardScheme.class
 com\sga\application\server\ApplicationService$AsyncProcessor.class
 com\sga\application\server\ApplicationService$Processor$communicate.class
+com\sga\application\server\ServerMQ.class
 com\sga\application\server\ApplicationServiceHandler.class
 com\sga\application\server\ApplicationService$Processor.class
