@@ -1,2 +1,2 @@
-# Assignment 1
-### Please Refer the wiki - assignment1 page
+# Assignment
+### Please Refer the wiki pages

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>Integrator</title>
+<script type = "text/javascript" src = "./public/vendors/jquery/jquery.min.js"></script>
+<script type = "text/javascript" src = "./public/vendors/tether/tether.min.js"></script>
+<script type = "text/javascript" src = "./public/vendors/bootstrap/js/bootstrap.min.js"></script>
+
+<script type = "text/javascript">
+    $(document).ready(function(){
+        console.log("Loaded");
+        $("#submit").click(function () {
+            console.log("Posted");
+
+            type = $("#selectPath").val();
+            text = $("#text").val();
+            request={"type":type,"text":text}
+            /*$.post( "test",request, function(response) {*/
+            $.post( "http://localhost:8000/test-mq",request, function(response) {
+                console.log(response);
+                $("#response").val(response);
+            }).fail(function() {
+				console.log( "error" );
+				$("#response").val("Please check if Gateway server is running");
+			});
+        });
+
+    });
+      </script> 
+<link rel="stylesheet" type="text/css" href="./public/vendors/bootstrap/css/bootstrap.css" />
+</head>
+
+<body>
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <form>
+                    <div class="form-group">
+                        <label for="selectPath">Select Data flow Path</label>
+                        <select class="form-control" id="selectPath">
+                            <option value="npj">nodejs to python to java</option>
+                            <!--<option value="nj">nodejs to java</option>
+                            <option value="np">nodejs to python</option>
+                            <option value="n">nodejs</option>-->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Input Text</label>
+                        <input type="text" class="form-control" id="text" aria-describedby="inputTextHelp" placeholder="Enter text" value="text">
+                        <small id="inputTextHelp" class="form-text text-muted">Enter any Text</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="response">Response</label>
+                        <textarea class="form-control" id="response" rows="3"></textarea>
+                    </div>
+                    <input id="submit" type="button" class="btn btn-primary" value="Test">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+
+</html>
