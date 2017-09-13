@@ -78,13 +78,13 @@ amqp.connect('amqp://sgatest:L3tm3t38t@149.165.168.247', function(err, conn) {
         });
     });
     function postPython(text) {
-        console.log("IN::test");
+        console.log("IN::NodeJs");
         conn.createChannel(function(err, ch) {
             var q = 'sga.simple.python';
             ch.assertQueue(q, {durable: false});
             var message = JSON.stringify({ text:text });
             ch.sendToQueue(q, new Buffer(message));
-            console.log(" [x] Sent 'Hello World!'");
+            console.log(" [x] Sent message ::"+message);
         });
     }
 

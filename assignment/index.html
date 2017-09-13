@@ -26,7 +26,17 @@
 				$("#response").val("Please check if Gateway server is running");
 			});
         });
-
+		$("#test").click(function () {
+            console.log("Testing");
+            /*$.post( "test",request, function(response) {*/
+            $.get( "http://localhost:8000/get-mq", function(response) {
+                console.log(response);
+                $("#outputText").val(response);
+            }).fail(function() {
+				console.log( "error" );
+				$("#outputText").val("Please check if Gateway server is running");
+			});
+        });
     });
       </script> 
 <link rel="stylesheet" type="text/css" href="./public/vendors/bootstrap/css/bootstrap.css" />
@@ -35,6 +45,9 @@
 <body>
 <section id="content">
     <div class="container">
+		<div class=row>
+			<h1>Post Data</h1>
+		</div>
         <div class="row">
             <div class="col-8">
                 <form>
@@ -56,12 +69,31 @@
                         <label for="response">Response</label>
                         <textarea class="form-control" id="response" rows="3"></textarea>
                     </div>
-                    <input id="submit" type="button" class="btn btn-primary" value="Test">
+                    <input id="submit" type="button" class="btn btn-primary" value="Post">
                 </form>
             </div>
         </div>
     </div>
 </section>
+<section>
+<div class="container">
+	<div class="row">
+		<h1>Check Job Status</h1>
+	</div>
+	<div class="row">
+		<div class="col-8">
+			<form>
+				<div class="form-group">
+					<label>Output</label>
+					<textarea id="outputText" class="form-control" rows="3"></textarea>
+				</div>
+				<input id="test" type="button" class="btn btn-success" value="Test">
+			</form>
+		</div/>
+	</div>
+</div>
+</section>
+
 
 
 </body>

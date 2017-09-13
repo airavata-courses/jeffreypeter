@@ -89,7 +89,8 @@ app.post('/test-mq',function (req,res) {
 
 });
 app.get('/get-mq',function (req,res) {
-    console.log("IN::test-mq");
+    res.setHeader('Access-Control-Allow-Origin','*');
+    console.log("IN::get-mq");
     // req.body.text = req.body.text + ":InGateway:";
     var msg;
 
@@ -119,7 +120,19 @@ app.get('/get-mq',function (req,res) {
             //ch.assertQueue('sga.gateway.completed', {durable: true});
             console.log("IN::assertExchange");
             // console.log(ch);
-            console.log(ch.get('sga.gateway.completed'),true);
+            ch.get('sga.gateway.completed',true,function(err,msg){
+                //console.log(msg.content.toString());
+				
+                conn.close;
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				try {
+					res.end(msg.content.toString());
+				} catch(e) {
+					console.log("In::Exception::No more messages to display")
+					res.end("Please wait or Issuse another Job");
+				}
+                
+            });
            /* ch.assertQueue('', {exclusive: true}, function(err, q) {
                 console.log("IN::assertQueue");
                 console.log(' [*] Waiting for logs. To exit press CTRL+C');
