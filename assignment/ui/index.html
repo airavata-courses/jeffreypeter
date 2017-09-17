@@ -18,7 +18,7 @@
             text = $("#text").val();
             request={"type":type,"text":text}
             /*$.post( "test",request, function(response) {*/
-            $.post( "http://localhost:8000/test-mq",request, function(response) {
+            $.post( "http://localhost:7000/test-mq",request, function(response) {
                 console.log(response);
                 $("#response").val(response);
             }).fail(function() {
@@ -29,7 +29,7 @@
 		$("#test").click(function () {
             console.log("Testing");
             /*$.post( "test",request, function(response) {*/
-            $.get( "http://localhost:8000/get-mq", function(response) {
+            $.get( "http://localhost:7000/get-mq", function(response) {
                 console.log(response);
                 $("#outputText").val(response);
             }).fail(function() {
