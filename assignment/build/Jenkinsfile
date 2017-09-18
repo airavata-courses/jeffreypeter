@@ -1,0 +1,16 @@
+node {
+   stage('Checkout') {
+       git credentialsId: '56a26497-e723-4fc0-9e89-a165a540667e', url: 'https://github.com/airavata-courses/jeffreypeter.git'
+   }
+   stage('clean') {
+        sshagent (credentials: ['PR']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l jeffravi 129.114.104.63 rm -f /home/jeffravi/build.sh'
+            sh 'scp "/var/lib/jenkins/workspace/SGA Pipeline/assignment/build/build.sh" jeffravi@129.114.104.63:/home/jeffravi/'
+        }
+   }
+   stage('start') {
+       sshagent (credentials: ['PR']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l jeffravi 129.114.104.63 sudo bash /home/jeffravi/build.sh'
+        }
+   }
+}
