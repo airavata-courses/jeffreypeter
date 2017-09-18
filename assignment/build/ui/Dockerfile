@@ -22,7 +22,7 @@ RUN chmod 700 /home/startup.sh
 RUN git clone https://github.com/airavata-courses/jeffreypeter.git
 
 # Checking dependencies
-RUN cd /home/jeffreypeter/assignment/gateway && npm -g install
+RUN cd /home/jeffreypeter/assignment/ui && npm -g install
 
 # Starting the Server
 CMD /home/startup.sh
